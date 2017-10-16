@@ -10,7 +10,9 @@ app.get('/', (request, response)=>{
     response.sendFile(__dirname +'/public/index.html')
 })
 
-app.post('/test', (request, response)=>{
+app.post('/simple', echo)
+
+app.post('/post', (request, response)=>{
     if(request.query.hasOwnProperty('wait')){
         setTimeout(()=>{
             echo(request, response)
@@ -18,11 +20,8 @@ app.post('/test', (request, response)=>{
     }
     else{
         echo(request, response)
-    }
-    
+    }  
 })
-app.post('/post', echo)
-
 
 
 function echo(request, response){
