@@ -10,15 +10,30 @@ app.get('/', (request, response)=>{
     response.sendFile(__dirname +'/public/index.html')
 })
 
-app.get('/test', (request, response)=>{
-    response.send('Hello there')
+app.post('/test', (request, response)=>{
+    if(request.query.hasOwnProperty('wait')){
+        setTimeout(()=>{
+            echo(request, response)
+        }, request.query.wait)
+    }
+    else{
+        echo(request, response)
+    }
+    
 })
-app.post('/post', (request, response)=>{
-    console.log(request.body)
-    response.send("Received following body: \r\n" + request.body)
-})
+app.post('/post', echo)
 
+
+
+function echo(request, response){
+    if(request.body.length===undefined || request.body.length===0){
+        response.send("Request body is empty")
+    }
+    else{
+        response.send("Received following body: \r\n" + request.body)
+    }
+    
+}
 app.listen(port, ()=>{
     console.log("Express app listening on port: " + port)
 })
-
