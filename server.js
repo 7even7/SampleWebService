@@ -15,7 +15,7 @@ app.get('/test', (request, response)=>{
 })
 app.post('/post', (request, response)=>{
     console.log(request.body)
-    response.send(request.body +  "  10-4")
+    response.send("Received following body: \r\n" + request.body)
 })
 
 app.listen(port, ()=>{
