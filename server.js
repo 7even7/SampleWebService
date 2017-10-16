@@ -2,11 +2,12 @@ var express = require('express')
 var app = express()
 var port = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
-app.use(bodyParser.text());
 
+app.use(bodyParser.text());
+app.use("/public",express.static(__dirname + "//public"));
 
 app.get('/', (request, response)=>{
-    response.sendFile(__dirname +'//public//index.html')
+    response.sendFile(__dirname +'/public/index.html')
 })
 
 app.get('/test', (request, response)=>{
